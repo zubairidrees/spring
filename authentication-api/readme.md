@@ -6,4 +6,6 @@ This application developed using Spring Boot 2.5.2
 
 Following Spring modules are used in this project
 
-Spring MVC Spring Security Spring DI
+Spring MVC 
+Spring Security 
+Spring DI
