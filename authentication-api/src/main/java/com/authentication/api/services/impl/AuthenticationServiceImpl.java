@@ -4,7 +4,7 @@ import com.authentication.api.dto.RequestUserDTO;
 import com.authentication.api.dto.ResponseDTO;
 import com.authentication.api.dto.ResponseUserDTO;
 import com.authentication.api.entities.User;
-import com.authentication.api.enums.ResponseCodes;
+import com.authentication.api.util.ResponseCodes;
 import com.authentication.api.services.AuthenticationService;
 import com.authentication.api.services.BlockBruteForceService;
 import com.authentication.api.services.UserService;
@@ -55,16 +55,16 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 
     private ResponseDTO setAttemptsBlockedResponse(ResponseDTO responseDTO) {
 
-        responseDTO.setResponseCode(ResponseCodes.RESPONSE_FORBIDDEN.getResponseCode());
-        responseDTO.setResponseMessage(Constants.ATTEMPT_BLOCKED_RES_DESC);
+        responseDTO.setResponseCode(ResponseCodes.RESPONSE_FORBIDDEN.getCode());
+        responseDTO.setResponseMessage(ResponseCodes.RESPONSE_FORBIDDEN.getDesc());
 
         return responseDTO;
     }
 
     private ResponseDTO setFailureResponse(ResponseDTO responseDTO) {
 
-        responseDTO.setResponseMessage(Constants.INVALID_CREDENTIALS_RES_DESC);
-        responseDTO.setResponseCode(ResponseCodes.RESPONSE_UNAUTHORIZED.getResponseCode());
+        responseDTO.setResponseMessage(ResponseCodes.RESPONSE_UNAUTHORIZED.getDesc());
+        responseDTO.setResponseCode(ResponseCodes.RESPONSE_UNAUTHORIZED.getCode());
 
         blockBruteForceService.logFailedAttempt(getUserIPAddress());
         return responseDTO;
@@ -72,9 +72,9 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 
     private ResponseDTO setSuccessResponse(ResponseDTO responseDTO, User user) {
 
-        responseDTO.setResponseMessage(user.getUserName() + Constants.SUCCESS_RES_DESC);
+        responseDTO.setResponseMessage(user.getUserName() + ResponseCodes.RESPONSE_OK.getDesc());
         responseDTO.setResponseUserDTO(setResponseUserDTO(user));
-        responseDTO.setResponseCode(ResponseCodes.RESPONSE_OK.getResponseCode());
+        responseDTO.setResponseCode(ResponseCodes.RESPONSE_OK.getCode());
 
         blockBruteForceService.logSuccessAttempt(getUserIPAddress());
         return responseDTO;

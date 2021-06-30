@@ -4,6 +4,7 @@ import com.authentication.api.dto.RequestUserDTO;
 import com.authentication.api.entities.User;
 import com.authentication.api.services.UserService;
 import com.authentication.api.util.Constants;
+import com.authentication.api.util.ResponseCodes;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -32,7 +33,7 @@ public class UserServiceImpl implements UserService {
         if(user.isPresent() && credentialsMatched(user.get(),requestUserDTO)) {
             return user.get();
         }else{
-            throw new BadCredentialsException(Constants.INVALID_CREDENTIALS_RES_DESC);
+            throw new BadCredentialsException(ResponseCodes.RESPONSE_UNAUTHORIZED.getDesc());
         }
     }
 

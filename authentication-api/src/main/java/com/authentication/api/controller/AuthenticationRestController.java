@@ -2,12 +2,11 @@ package com.authentication.api.controller;
 
 import com.authentication.api.dto.RequestUserDTO;
 import com.authentication.api.dto.ResponseDTO;
-import com.authentication.api.enums.ResponseCodes;
+import com.authentication.api.util.ResponseCodes;
 import com.authentication.api.services.AuthenticationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -29,9 +28,9 @@ public class AuthenticationRestController {
 
         ResponseDTO responseDTO = authenticationService.authenticateUser(requestUserDTO);
 
-        if(responseDTO.getResponseCode().equals(ResponseCodes.RESPONSE_UNAUTHORIZED.getResponseCode())){
+        if(responseDTO.getResponseCode().equals(HttpStatus.UNAUTHORIZED.value())){
             return new ResponseEntity<>(responseDTO, HttpStatus.UNAUTHORIZED);
-        }else if(responseDTO.getResponseCode().equals(ResponseCodes.RESPONSE_FORBIDDEN.getResponseCode())){
+        }else if(responseDTO.getResponseCode().equals(ResponseCodes.RESPONSE_FORBIDDEN.getCode())){
             return new ResponseEntity<>(responseDTO,HttpStatus.FORBIDDEN);
         }
 
