@@ -55,16 +55,16 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 
     private ResponseDTO setAttemptsBlockedResponse(ResponseDTO responseDTO) {
 
-        responseDTO.setResponseCode(ResponseCodes.RESPONSE_FORBIDDEN.getCode());
-        responseDTO.setResponseMessage(ResponseCodes.RESPONSE_FORBIDDEN.getDesc());
+        responseDTO.setResponseCode(ResponseCodes.FORBIDDEN.getCode());
+        responseDTO.setResponseMessage(ResponseCodes.FORBIDDEN.getDesc());
 
         return responseDTO;
     }
 
     private ResponseDTO setFailureResponse(ResponseDTO responseDTO) {
 
-        responseDTO.setResponseMessage(ResponseCodes.RESPONSE_UNAUTHORIZED.getDesc());
-        responseDTO.setResponseCode(ResponseCodes.RESPONSE_UNAUTHORIZED.getCode());
+        responseDTO.setResponseMessage(ResponseCodes.UNAUTHORIZED.getDesc());
+        responseDTO.setResponseCode(ResponseCodes.UNAUTHORIZED.getCode());
 
         blockBruteForceService.logFailedAttempt(getUserIPAddress());
         return responseDTO;
@@ -72,9 +72,9 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 
     private ResponseDTO setSuccessResponse(ResponseDTO responseDTO, User user) {
 
-        responseDTO.setResponseMessage(user.getUserName() + ResponseCodes.RESPONSE_OK.getDesc());
+        responseDTO.setResponseMessage(user.getUserName() + ResponseCodes.OK.getDesc());
         responseDTO.setResponseUserDTO(setResponseUserDTO(user));
-        responseDTO.setResponseCode(ResponseCodes.RESPONSE_OK.getCode());
+        responseDTO.setResponseCode(ResponseCodes.OK.getCode());
 
         blockBruteForceService.logSuccessAttempt(getUserIPAddress());
         return responseDTO;

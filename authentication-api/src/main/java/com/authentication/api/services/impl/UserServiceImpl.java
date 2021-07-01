@@ -33,7 +33,7 @@ public class UserServiceImpl implements UserService {
         if(user.isPresent() && credentialsMatched(user.get(),requestUserDTO)) {
             return user.get();
         }else{
-            throw new BadCredentialsException(ResponseCodes.RESPONSE_UNAUTHORIZED.getDesc());
+            throw new BadCredentialsException(ResponseCodes.UNAUTHORIZED.getDesc());
         }
     }
 

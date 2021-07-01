@@ -30,7 +30,7 @@ public class AuthenticationRestController {
 
         if(responseDTO.getResponseCode().equals(HttpStatus.UNAUTHORIZED.value())){
             return new ResponseEntity<>(responseDTO, HttpStatus.UNAUTHORIZED);
-        }else if(responseDTO.getResponseCode().equals(ResponseCodes.RESPONSE_FORBIDDEN.getCode())){
+        }else if(responseDTO.getResponseCode().equals(ResponseCodes.FORBIDDEN.getCode())){
             return new ResponseEntity<>(responseDTO,HttpStatus.FORBIDDEN);
         }
 
